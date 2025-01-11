@@ -12,11 +12,11 @@ sudo bash install_environment.sh
 - MySQL
 - NGINX
 - memcached
+- opensearch(+jdk)
+- opensearch-dashboard
 
 todo
 - redis
-- opensearch(+jdk)
-- opensearch-dashboard
 - minio
 - rabbitmq
 - zabbix
