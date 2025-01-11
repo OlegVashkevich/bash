@@ -124,9 +124,49 @@ install_memcached () {
     read -p "$(echo -e $Green"Finish install Memcached"$Color_Off. Press enter to continue)"
 }
 
+install_opensearch () {
+    apt update && sudo apt upgrade -y
+    wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
+    dpkg -i jdk-21_linux-x64_bin.deb
+    java -version
+    rm -f jdk-21_linux-x64_bin.deb
+    wget https://artifacts.opensearch.org/releases/bundle/opensearch/2.18.0/opensearch-2.18.0-linux-x64.deb
+    read -p "OPENSEARCH_INITIAL_ADMIN_PASSWORD(minimum 8 character password and must contain at least one uppercase letter, one lowercase letter, one digit, and one special character that is strong)[Q1w2e3R$]: " pass
+    pass=${pass:-Q1w2e3R$}
+    env OPENSEARCH_INITIAL_ADMIN_PASSWORD=$pass dpkg -i opensearch-2.18.0-linux-x64.deb
+    rm -f opensearch-2.18.0-linux-x64.deb
+    systemctl daemon-reload
+    systemctl enable opensearch
+    systemctl start opensearch
+    #systemctl status opensearch
+    #nano /etc/sysctl.conf
+cat >> /etc/opensearch/opensearch.yml <<EOF
+network.host: 0.0.0.0
+discovery.type: single-node
+plugins.security.disabled: true
+EOF
+    curl -X GET "http://localhost:9200"
+    read -p "$(echo -e $Green"Finish install Opensearch"$Color_Off. Press enter to continue)"
+}
+
+install_dashboards () {
+    apt update && sudo apt upgrade -y
+    wget https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.18.0/opensearch-dashboards-2.18.0-linux-x64.deb
+    dpkg -i opensearch-dashboards-2.18.0-linux-x64.deb
+cat >> /etc/opensearch-dashboards/opensearch_dashboards.yml <<EOF
+server.host: 0.0.0.0
+EOF
+    rm -f opensearch-dashboards-2.18.0-linux-x64.deb
+    systemctl daemon-reload
+    systemctl enable opensearch-dashboards
+    systemctl start opensearch-dashboards
+    systemctl status opensearch-dashboards
+    read -p "$(echo -e $Green"Finish install Opensearch-Dashboards"$Color_Off. Press enter to continue)"
+}
+
 echo "What do you wish to install?"
 PS3="Select operation: "
-select yn in PHP Composer Git MySQL NGINX Memcached Exit; do
+select yn in PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Exit; do
     case $yn in
         PHP ) install_php;;
         Composer ) install_composer;;
@@ -134,6 +174,8 @@ select yn in PHP Composer Git MySQL NGINX Memcached Exit; do
         MySQL ) install_mysql;;
         NGINX ) install_nginx;;
         Memcached ) install_memcached;;
+        Opensearch ) install_opensearch;;
+        Opensearch-Dashboards ) install_dashboards;;
         Exit ) exit;;
     esac
 done

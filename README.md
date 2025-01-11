@@ -15,7 +15,8 @@ sudo bash install_environment.sh
 
 todo
 - redis
-- opensearch
+- opensearch(+jdk)
+- opensearch-dashboard
 - minio
 - rabbitmq
 - zabbix
