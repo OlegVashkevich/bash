@@ -114,15 +114,26 @@ EOF
     read -p "$(echo -e $Green"Finish install NGINX"$Color_Off. You can open http://dev.local/. Press enter to continue)"
 }
 
+install_memcached () {
+    apt install memcached libmemcached-tools
+    memcached --version
+    systemctl enable memcached
+    systemctl start memcached
+    systemctl status memcached
+    ss -plunt | grep memcached
+    read -p "$(echo -e $Green"Finish install Memcached"$Color_Off. Press enter to continue)"
+}
+
 echo "What do you wish to install?"
 PS3="Select operation: "
-select yn in PHP Composer Git MySQL NGINX Exit; do
+select yn in PHP Composer Git MySQL NGINX Memcached Exit; do
     case $yn in
         PHP ) install_php;;
         Composer ) install_composer;;
         Git ) install_git;;
         MySQL ) install_mysql;;
         NGINX ) install_nginx;;
+        Memcached ) install_memcached;;
         Exit ) exit;;
     esac
 done

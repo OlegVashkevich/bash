@@ -11,9 +11,9 @@ sudo bash install_environment.sh
 - Git
 - MySQL
 - NGINX
+- memcached
 
 todo
-- memcached
 - redis
 - opensearch
 - minio
