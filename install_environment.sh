@@ -105,7 +105,7 @@ EOF
     nginx -t
     nginx -s reload
     var="user $name;"
-    #change nginx user
+    #change nginx user(1st line)
     sed -i "1s/.*/$var/" /etc/nginx/nginx.conf
     #change fpm user
     sed -i "s/www-data/$name/g" /etc/php/8.3/fpm/pool.d/www.conf

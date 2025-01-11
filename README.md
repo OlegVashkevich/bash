@@ -6,8 +6,16 @@ sudo bash install_environment.sh
 ```
 устанавливает на выбор 
 
-- PHP
+- PHP(8.3 + fpm)
 - Composer
 - Git
 - MySQL
 - NGINX
+
+todo
+- memcached
+- redis
+- opensearch
+- minio
+- rabbitmq
+- zabbix
