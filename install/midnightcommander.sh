@@ -1,5 +1,5 @@
 #MidnightCommander
-install_mc () {
+install_midnightcommander () {
     apt install mc -y
     echo "Do you want set mcedit as default editor?"
     PS3="Select operation: "
