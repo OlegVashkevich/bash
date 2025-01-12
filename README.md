@@ -14,9 +14,9 @@ sudo bash install_environment.sh
 - memcached
 - opensearch(+jdk)
 - opensearch-dashboard
+- Munin
 
 todo
 - redis
 - minio
 - rabbitmq
-- zabbix

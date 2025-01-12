@@ -163,7 +163,7 @@ install_opensearch () {
 cat >> /etc/opensearch/opensearch.yml <<EOF
 network.host: 0.0.0.0
 discovery.type: single-node
-plugins.security.disabled: true
+#plugins.security.disabled: true
 EOF
     curl -X GET "http://localhost:9200"
     read -p "$(echo -e $Green"Finish install Opensearch"$Color_Off. Press enter to continue)"
@@ -184,9 +184,29 @@ EOF
     read -p "$(echo -e $Green"Finish install Opensearch-Dashboards"$Color_Off. Press enter to continue)"
 }
 
+install_munin () {
+    apt update && sudo apt upgrade -y
+    apt install munin munin-node munin-plugins-extra -y
+    htpasswd -c /etc/munin/munin-htpasswd admin
+    systemctl restart munin-node
+    systemctl status munin-node
+cat >> /etc/nginx/sites-available/munin.dev.local <<EOF
+server {
+listen 80;
+server_name munin.dev.local;
+root /var/cache/munin/www;
+index index.html;
+}
+EOF
+    ln -s /etc/nginx/sites-available/munin.dev.local /etc/nginx/sites-enabled/munin.dev.local
+    nginx -t
+    nginx -s reload
+    read -p "$(echo -e $Green"Finish install Munin"$Color_Off. You can open http://munin.dev.local/. Press enter to continue)"
+}
+
 echo "What do you wish to install?"
 PS3="Select operation: "
-select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Exit; do
+select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Munin Exit; do
     case $yn in
         MidnightCommander ) install_mc;;
         PHP ) install_php;;
@@ -197,6 +217,7 @@ select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch
         Memcached ) install_memcached;;
         Opensearch ) install_opensearch;;
         Opensearch-Dashboards ) install_dashboards;;
+        Munin ) install_munin;;
         Exit ) exit;;
     esac
 done
