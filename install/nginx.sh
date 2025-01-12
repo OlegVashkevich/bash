@@ -2,7 +2,7 @@
 install_nginx () {
     systemctl stop apache2
     apt-get install nginx -y
-    read -p "Write '127.0.0.1 dev.local' to file C:\Windows\System32\drivers\etc\hosts. Then press enter to continue"
+    read -p "If use WSL - write '127.0.0.1 dev.local' to file C:\Windows\System32\drivers\etc\hosts. Then press enter to continue"
     read -p "Enter user folder name [oleg]: " name
     name=${name:-oleg}
     rm -f /etc/nginx/sites-available/default

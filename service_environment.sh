@@ -7,8 +7,8 @@ showMenu(){
     echo "--------------------------------"
     echo "    Service your environment   "
     echo "--------------------------------"
-    echo "[1] add site(in development)"
-    echo "[2] remove site(in development)"
+    echo "[1] add site"
+    echo "[2] remove site"
     echo "--------------------------------"
     echo "           services            "
     echo "--------------------------------"
@@ -57,13 +57,91 @@ action(){
     read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
 }
 
+create_index () {
+    sudo -u $3 mkdir -p $1
+cat > $1/index.php <<EOF
+<?php
+    echo "Hello $2";
+EOF
+}
+
+add_site(){
+    [ $SUDO_USER ] && user=$SUDO_USER || user=`whoami`
+    read -p "Enter server_name ex.:[dev.local]: " name
+    name=${name:-dev.local}
+    read -p "Enter root_path ex.:[/home/$user/$name/public]: " path
+    path=${path:-/home/$user/$name/public}
+cat > /etc/nginx/sites-available/$name <<EOF
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $name;
+    root $path;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+EOF
+    ln -s /etc/nginx/sites-available/$name /etc/nginx/sites-enabled/$name
+    nginx -t
+    nginx -s reload
+    echo "site added  to nginx"
+    echo "Do you want create $path/index.php?"
+    PS3="Select operation: "
+    select yn in Yes No; do
+        case $yn in
+            Yes ) create_index $path $name $user;break;;
+            No ) break;;
+        esac
+    done
+}
+
 while [[ "$m" != "0" ]]
 do
     if [[ "$m" == "1" ]]; then
-        echo "add site to nginx"
-
+        add_site
+        read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "2" ]]; then
-        echo "remove site from nginx"
+        #get all sites
+        arrsites=( $(ls /etc/nginx/sites-available/) )
+        echo "Choose one of sites you want remove"
+        PS3="Select number: "
+        select ys in "exit" "${arrsites[@]}" 
+        do
+            if [ "$ys" == "exit" ]
+            then break;
+            elif [ "$ys" ]
+            then 
+                echo $ys;
+                rm -f /etc/nginx/sites-available/$ys
+                rm -f /etc/nginx/sites-enabled/$ys
+                echo "site $ys removed from nginx"
+            fi
+        done
+        read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "3" ]]; then
         systemctl --no-pager list-units --type service
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
