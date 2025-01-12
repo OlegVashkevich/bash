@@ -1,10 +1,10 @@
 # Bash cкрипты
-
-## Настройки окружения для WSL Debian(12)
 скачиваем
 ```bash
 curl -s -L https://github.com/OlegVashkevich/bash/archive/refs/heads/master.tar.gz | tar -xz && mv bash-master/* . && rm -rf bash-master
 ```
+
+## Установка окружения для WSL Debian(12)
 запускаем
 ```bash
 sudo bash install_environment.sh
@@ -37,7 +37,13 @@ sudo bash install_environment.sh
  }
  ```
 
+ ## Настройки окружения и управление сервисами для WSL Debian(12)
+запускаем
+```bash
+sudo bash service_environment.sh
+```
 
-TODO: разобраться у opensearch с плагином security (получилось завести только с его удалением)
 
-TODO: Скрипт для добавления нового проекта по какркасу + настройка nginx
+## TODO
+- разобраться у opensearch с плагином security (получилось завести только с его удалением)
+- Скрипт для добавления нового проекта по каркасу + настройка nginx(добавить реализацию в service_environment.sh)
