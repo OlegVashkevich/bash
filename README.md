@@ -25,6 +25,18 @@ sudo bash install_environment.sh
 - [minio](install/minio.sh)
 - [redis](install/redis.sh)
 
+### Новые пункты меню
+что бы создать новый пункт меню, надо
+ - добавить файл c названием {filename} в директорию install
+ - в айле должна быть функция с названием install_{filename}
+ пример:
+ ```bash
+ install_filename () {
+    echo "Start install Filename"
+    read -p "$(echo -e $Green"Finish install Filename"$Color_Off. Press enter to continue)"
+ }
+ ```
+
 
 TODO: разобраться у opensearch с плагином security (получилось завести только с его удалением)
 
