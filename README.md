@@ -20,3 +20,5 @@ todo
 - redis
 - minio
 - rabbitmq
+
+TODO: разобраться у opensearch с плагином security (получилось завести только с его удалением)
