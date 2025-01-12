@@ -1,46 +1,46 @@
 #!/bin/bash
 
 #console colors
-. ./colors.sh
+. ./common/colors.sh
 
 #MidnightCommander
-. ./midnightCommander.sh
+. ./install/midnightCommander.sh
 
 #PHP
-. ./php.sh
+. ./install/php.sh
 
 #Composer
-. ./composer.sh
+. ./install/composer.sh
 
 #Git
-. ./git.sh
+. ./install/git.sh
 
 #MySQL 
-. ./mysql.sh
+. ./install/mysql.sh
 
 #Nginx
-. ./nginx.sh
+. ./install/nginx.sh
 
 #Memcached
-. ./memcached.sh
+. ./install/memcached.sh
 
 #Opensearch
-. ./opensearch.sh
+. ./install/opensearch.sh
 
 #Opensearch-Dashboards
-. ./dashboards.sh
+. ./install/dashboards.sh
 
 #Munin
-. ./munin.sh
+. ./install/munin.sh
 
 #RabbitMQ
-. ./rabbitmq.sh
+. ./install/rabbitmq.sh
 
 #MinIO
-. ./minio.sh
+. ./install/minio.sh
 
 #Redis
-. ./redis.sh
+. ./install/redis.sh
 
 echo "What do you wish to install?"
 PS3="Select operation: "
