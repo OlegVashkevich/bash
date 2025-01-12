@@ -1,6 +1,6 @@
 #memcached
 install_memcached () {
-    apt install memcached libmemcached-tools
+    apt install memcached libmemcached-tools -y
     memcached --version
     systemctl enable memcached
     systemctl start memcached

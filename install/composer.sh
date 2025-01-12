@@ -1,6 +1,6 @@
 #Composer
 install_composer () {
-    apt install curl
+    apt install curl -y
     cd ~
     curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
     HASH=`curl -sS https://composer.github.io/installer.sig`

@@ -22,3 +22,5 @@ sudo bash install_environment.sh
 
 
 TODO: разобраться у opensearch с плагином security (получилось завести только с его удалением)
+
+TODO: Скрипт для добавления нового проекта по какркасу + настройка nginx
