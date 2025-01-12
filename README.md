@@ -6,6 +6,7 @@ sudo bash install_environment.sh
 ```
 устанавливает на выбор 
 
+- Midnight Commander
 - PHP(8.3 + fpm)
 - Composer
 - Git
