@@ -1,10 +1,10 @@
 # Bash cкрипты
 скачиваем
 ```bash
-curl -s -L https://github.com/OlegVashkevich/bash/archive/refs/heads/master.tar.gz | tar -xz && mv bash-master/* . && rm -rf bash-master
+curl -s -L https://github.com/OlegVashkevich/bash/archive/refs/heads/master.tar.gz | tar -xz && mv bash-master bash
 ```
 
-## Установка окружения для WSL Debian(12)
+## Установка окружения для Debian(12)
 запускаем
 ```bash
 sudo bash install_environment.sh
@@ -37,7 +37,7 @@ sudo bash install_environment.sh
  }
  ```
 
- ## Настройки окружения и управление сервисами для WSL Debian(12)
+ ## Настройки окружения и управление сервисами для Debian(12)
 запускаем
 ```bash
 sudo bash service_environment.sh
