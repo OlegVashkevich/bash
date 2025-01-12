@@ -44,7 +44,7 @@ EOF
     apt-get install rabbitmq-server -y --fix-missing
     rabbitmq-plugins enable rabbitmq_management
     systemctl start rabbitmq-server
-    systemctl status rabbitmq-server
+    systemctl status rabbitmq-server --no-pager
     read -p "Set username[rabbitmqadmin]: " name
     name=${name:-rabbitmqadmin}
     read -p "Set password [Q1w2e3R$]: " pass

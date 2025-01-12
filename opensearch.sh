@@ -13,7 +13,7 @@ install_opensearch () {
     systemctl daemon-reload
     systemctl enable opensearch
     systemctl start opensearch
-    #systemctl status opensearch
+    systemctl status opensearch --no-pager
     #nano /etc/sysctl.conf
 cat >> /etc/opensearch/opensearch.yml <<EOF
 network.host: 0.0.0.0

@@ -10,6 +10,6 @@ EOF
     systemctl daemon-reload
     systemctl enable opensearch-dashboards
     systemctl start opensearch-dashboards
-    systemctl status opensearch-dashboards
+    systemctl status opensearch-dashboards --no-pager
     read -p "$(echo -e $Green"Finish install Opensearch-Dashboards"$Color_Off. Press enter to continue)"
 }

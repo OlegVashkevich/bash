@@ -4,7 +4,7 @@ install_munin () {
     apt install munin munin-node munin-plugins-extra -y
     htpasswd -c /etc/munin/munin-htpasswd admin
     systemctl restart munin-node
-    systemctl status munin-node
+    systemctl status munin-node --no-pager
 cat >> /etc/nginx/sites-available/munin.dev.local <<EOF
 server {
 listen 80;
