@@ -1,12 +1,17 @@
 # Bash cкрипты
 
 ## Настройки окружения для WSL Debian(12)
+скачиваем
+```bash
+curl -s -L https://github.com/OlegVashkevich/bash/archive/refs/heads/master.tar.gz | tar -xz && mv bash-master/* . && rm -rf bash-master
+```
+запускаем
 ```bash
 sudo bash install_environment.sh
 ```
 устанавливает на выбор 
 
-- [Midnight Commander](install/midnightCommander.sh)
+- [Midnight Commander](install/midnightcommander.sh)
 - [PHP(8.3+fpm)](install/php.sh)
 - [Composer](install/composer.sh)
 - [Git](install/git.sh)
