@@ -9,7 +9,7 @@ install_nginx () {
     rm -f /etc/nginx/sites-enabled/default
     rm -f /etc/nginx/sites-available/dev.local
     rm -f /etc/nginx/sites-enabled/dev.local
-cat >> /etc/nginx/sites-available/dev.local <<EOF
+cat > /etc/nginx/sites-available/dev.local <<EOF
 server {
     listen 80;
     listen [::]:80;

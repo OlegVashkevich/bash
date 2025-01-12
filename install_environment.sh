@@ -21,24 +21,27 @@
 #Nginx
 . ./nginx.sh
 
-#memcached
+#Memcached
 . ./memcached.sh
 
-#opensearch
+#Opensearch
 . ./opensearch.sh
 
-#dashboards
+#Opensearch-Dashboards
 . ./dashboards.sh
 
-#munin
+#Munin
 . ./munin.sh
 
-#rabbitmq
+#RabbitMQ
 . ./rabbitmq.sh
+
+#MinIO
+. ./minio.sh
 
 echo "What do you wish to install?"
 PS3="Select operation: "
-select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Munin RabbitMQ Exit; do
+select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Munin RabbitMQ MinIO Exit; do
     case $yn in
         MidnightCommander ) install_mc;;
         PHP ) install_php;;
@@ -51,6 +54,7 @@ select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch
         Opensearch-Dashboards ) install_dashboards;;
         Munin ) install_munin;;
         RabbitMQ ) install_rabbitmq;;
+        MinIO ) install_minio;;
         Exit ) exit;;
     esac
 done
