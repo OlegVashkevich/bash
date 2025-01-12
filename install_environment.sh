@@ -39,9 +39,12 @@
 #MinIO
 . ./minio.sh
 
+#Redis
+. ./redis.sh
+
 echo "What do you wish to install?"
 PS3="Select operation: "
-select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Munin RabbitMQ MinIO Exit; do
+select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Munin RabbitMQ MinIO Redis Exit; do
     case $yn in
         MidnightCommander ) install_mc;;
         PHP ) install_php;;
@@ -55,6 +58,7 @@ select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch
         Munin ) install_munin;;
         RabbitMQ ) install_rabbitmq;;
         MinIO ) install_minio;;
+        Redis ) install_redis;;
         Exit ) exit;;
     esac
 done

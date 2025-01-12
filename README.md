@@ -17,8 +17,7 @@ sudo bash install_environment.sh
 - Munin
 - rabbitmq(+erlang)
 - minio
-
-todo
 - redis
+
 
 TODO: разобраться у opensearch с плагином security (получилось завести только с его удалением)
