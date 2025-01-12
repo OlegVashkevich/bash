@@ -13,6 +13,26 @@ Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
+#MidnightCommander
+install_mc () {
+    apt install mc
+    echo "Do you want set mcedit as default editor?"
+    PS3="Select operation: "
+    select yn in Yes No; do
+        case $yn in
+            Yes ) install_mcedit;break;;
+            No ) break;;
+        esac
+    done
+    read -p "$(echo -e $Green"Finish install MidnightCommander"$Color_Off. Press enter to continue)"
+}
+
+install_mcedit () {
+    update-alternatives --config editor
+    select-editor
+    read -p "$(echo -e $Green"Finish install mcedit"$Color_Off. Press enter to continue)"
+}
+
 #PHP
 install_php () {
     apt update -y && sudo apt upgrade -y
@@ -166,8 +186,9 @@ EOF
 
 echo "What do you wish to install?"
 PS3="Select operation: "
-select yn in PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Exit; do
+select yn in MidnightCommander PHP Composer Git MySQL NGINX Memcached Opensearch Opensearch-Dashboards Exit; do
     case $yn in
+        MidnightCommander ) install_mc;;
         PHP ) install_php;;
         Composer ) install_composer;;
         Git ) install_git;;
