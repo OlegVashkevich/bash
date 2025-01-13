@@ -8,7 +8,7 @@ curl -s -L https://github.com/OlegVashkevich/webdevenv/archive/refs/heads/master
 ## Установка окружения для Debian(12)
 запускаем
 ```bash
-sudo bash install_environment.sh
+sudo bash install.sh
 ```
 устанавливает на выбор 
 
@@ -41,6 +41,6 @@ sudo bash install_environment.sh
  ## Настройки окружения и управление сервисами для Debian(12)
 запускаем
 ```bash
-sudo bash service_environment.sh
+sudo bash service.sh
 ```
 
