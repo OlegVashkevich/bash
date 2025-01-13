@@ -1,4 +1,76 @@
 # WebDevEnv
+- [en](#content)
+- [ru](#содержание)
+---
+## Content
+- [Description](#description)
+- [Download](#download)
+- [Installation Environment for Debian(12)](#installation-environment-for-debian12)
+    - [New Menu Items](#new-menu-items)
+- [Environment Settings and Service Management for Debian(12)](#environment-settings-and-service-management-for-debian12)
+
+## Description
+
+About once a year, I find myself needing to set up an environment for web development under VDS/VPS or WSL, and each time, the knowledge gained previously is forgotten. As a result, during the last setup for WSL, I wanted to systematize the process and create a toolset. This led to creating this set of scripts.
+
+## Download
+
+Download
+```bash
+sudo apt install curl wget -y
+curl -s -L https://github.com/OlegVashkevich/webdevenv/archive/refs/heads/master.tar.gz | tar -xz && mv webdevenv-master webdevenv && cd webdevenv
+```
+
+## Installation Environment for Debian(12)
+
+Run
+```bash
+sudo bash install.sh
+```
+At this moment, it allows you to choose from the following:
+
+- [Midnight Commander](install/midnightcommander.sh)
+- [PHP(8.3+fpm)](install/php.sh)
+- [Composer](install/composer.sh)
+- [Git](install/git.sh)
+- [MySQL](install/mysql.sh)
+- [NGINX](install/nginx.sh)
+- [memcached](install/memcached.sh)
+- [opensearch](install/opensearch.sh)
+- [opensearch-dashboards](install/dashboards.sh)
+- [Munin](install/munin.sh)
+- [rabbitmq(+erlang)](install/rabbitmq.sh)
+- [minio](install/minio.sh)
+- [redis](install/redis.sh)
+
+### New Menu Items
+
+To create a new menu item, you need to:
+ - Add a file named {filename} in the install directory
+ - In the file, there should be a function with the name install_{filename}
+ Example:
+ ```bash
+ install_filename () {
+    echo "Start install Filename"
+    read -p "$(echo -e $Green"Finish install Filename"$Color_Off. Press enter to continue)"
+ }
+ ```
+
+ ## Environment Settings and Service Management for Debian(12)
+
+Allows you to:
+- Add or delete a new site in the Nginx (php-fpm) configuration
+- Manage services
+
+Run
+```bash
+sudo bash service.sh
+```
+
+[up](#webdevenv)
+
+---
+## Содержание
 - [Описание](#описание)
 - [Загрузка](#загрузка)
 - [Установка окружения для Debian(12)](#установка-окружения-для-debian12)
@@ -61,4 +133,4 @@ sudo bash install.sh
 ```bash
 sudo bash service.sh
 ```
-
+[вверх](#webdevenv)
