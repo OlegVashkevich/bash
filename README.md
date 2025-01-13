@@ -1,6 +1,7 @@
 # Bash cкрипты
 скачиваем
 ```bash
+sudo apt install curl wget -y
 curl -s -L https://github.com/OlegVashkevich/webdevenv/archive/refs/heads/master.tar.gz | tar -xz && mv webdevenv-master webdevenv && cd webdevenv
 ```
 
@@ -18,7 +19,7 @@ sudo bash install_environment.sh
 - [MySQL](install/mysql.sh)
 - [NGINX](install/nginx.sh)
 - [memcached](install/memcached.sh)
-- [opensearch(+jdk)](install/opensearch.sh)
+- [opensearch](install/opensearch.sh)
 - [opensearch-dashboards](install/dashboards.sh)
 - [Munin](install/munin.sh)
 - [rabbitmq(+erlang)](install/rabbitmq.sh)
@@ -43,7 +44,3 @@ sudo bash install_environment.sh
 sudo bash service_environment.sh
 ```
 
-
-## TODO
-- разобраться у opensearch с плагином security (получилось завести только с его удалением)
-- Скрипт для добавления нового проекта по каркасу + настройка nginx(добавить реализацию в service_environment.sh)
