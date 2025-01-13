@@ -1,7 +1,7 @@
 # Bash cкрипты
 скачиваем
 ```bash
-curl -s -L https://github.com/OlegVashkevich/bash/archive/refs/heads/master.tar.gz | tar -xz && mv bash-master bash && cd bash
+curl -s -L https://github.com/OlegVashkevich/webdevenv/archive/refs/heads/master.tar.gz | tar -xz && mv webdevenv-master webdevenv && cd webdevenv
 ```
 
 ## Установка окружения для Debian(12)
