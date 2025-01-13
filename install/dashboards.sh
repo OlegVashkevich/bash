@@ -1,15 +1,11 @@
 #dashboards
 install_dashboards () {
-    apt update && sudo apt upgrade -y
-    wget https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.18.0/opensearch-dashboards-2.18.0-linux-x64.deb -O osdashboards.deb
-    dpkg -i osdashboards.deb
-    rm -f osdashboards.deb
-cat >> /etc/opensearch-dashboards/opensearch_dashboards.yml <<EOF
-server.host: 0.0.0.0
-EOF
+    echo "deb https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.x/apt stable main" | tee -a /etc/apt/sources.list.d/opensearch-2.x.list
+    apt update
+    apt install opensearch-dashboards
     systemctl daemon-reload
     systemctl enable opensearch-dashboards
-    systemctl start opensearch-dashboards
+    systemctl restart opensearch-dashboards
     systemctl status opensearch-dashboards --no-pager
-    read -p "$(echo -e $Green"Finish install Opensearch-Dashboards"$Color_Off. Press enter to continue)"
+    read -p "$(echo -e $Green"Finish install Opensearch-Dashboards"$Color_Off. Open http://localhost:5601. Press enter to continue)"
 }

@@ -1,25 +1,15 @@
 #opensearch
 install_opensearch () {
-    apt update && sudo apt upgrade -y
-    wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb -O jdk.deb
-    dpkg -i jdk.deb
-    java -version
-    rm -f jdk.deb
-    wget https://artifacts.opensearch.org/releases/bundle/opensearch/2.18.0/opensearch-2.18.0-linux-x64.deb -O opensearch.deb
-    read -p "OPENSEARCH_INITIAL_ADMIN_PASSWORD(minimum 8 character password and must contain at least one uppercase letter, one lowercase letter, one digit, and one special character that is strong)[Q1w2e3R$]: " pass
-    pass=${pass:-Q1w2e3R$}
-    env OPENSEARCH_INITIAL_ADMIN_PASSWORD=$pass dpkg -i opensearch.deb
-    rm -f opensearch.deb
+    apt -y install curl lsb-release gnupg2 ca-certificates
+    curl -fsSL https://artifacts.opensearch.org/publickeys/opensearch.pgp| gpg --dearmor -o /etc/apt/trusted.gpg.d/opensearch.gpg
+    echo "deb https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/apt stable main" | tee /etc/apt/sources.list.d/opensearch-2.x.list
+    apt update -y
+    read -p "OPENSEARCH_INITIAL_ADMIN_PASSWORD(minimum 8 character password and must contain at least one uppercase letter, one lowercase letter, one digit, and one special character that is strong)[Your123_Something@Secure]: " pass
+    pass=${pass:-Your123_Something@Secure}
+    env OPENSEARCH_INITIAL_ADMIN_PASSWORD=$pass apt install opensearch
     systemctl daemon-reload
-    systemctl enable opensearch
-    systemctl start opensearch
+    systemctl restart opensearch
     systemctl status opensearch --no-pager
-    #nano /etc/sysctl.conf
-cat >> /etc/opensearch/opensearch.yml <<EOF
-network.host: 0.0.0.0
-discovery.type: single-node
-#plugins.security.disabled: true
-EOF
-    curl -X GET "http://localhost:9200"
+    curl -X GET https://localhost:9200 -u "admin:$pass" --insecure
     read -p "$(echo -e $Green"Finish install Opensearch"$Color_Off. Press enter to continue)"
 }
