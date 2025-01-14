@@ -147,7 +147,7 @@ do
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "4" ]]; then
         #get all services
-        arrservices=($(systemctl list-units -t service --plain --no-legend --no-page | awk -F[@\.] '{print $1}'))
+        arrservices=($(systemctl list-units -t service --plain --no-legend --no-page| grep -ve "systemd" -ve "getty" | awk -F'.service' '{print $1}'))
         echo "Choose one of service"
         PS3="Select number: "
         select yn in "exit" "${arrservices[@]}" 

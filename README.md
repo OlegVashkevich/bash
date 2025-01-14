@@ -136,3 +136,6 @@ sudo bash install.sh
 sudo bash service.sh
 ```
 [вверх](#webdevenv)
+
+## Todo
+ список сервисов разными цветами в зависимости от текущего состояния
