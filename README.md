@@ -38,6 +38,7 @@ At this moment, it allows you to choose from the following:
 - [memcached](install/memcached.sh)
 - [opensearch](install/opensearch.sh)
 - [opensearch-dashboards](install/dashboards.sh)
+- [manticore](install/manticore.sh)
 - [Munin](install/munin.sh)
 - [rabbitmq(+erlang)](install/rabbitmq.sh)
 - [minio](install/minio.sh)
