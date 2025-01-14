@@ -143,19 +143,22 @@ do
         done
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "3" ]]; then
-        systemctl --no-pager list-units --type service
+        systemctl list-unit-files --type service  --output=json-pretty --state enabled,disabled | grep -ve "systemd" -ve "getty"  -ve "@" 
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "4" ]]; then
         #get all services
-        arrservices=($(systemctl list-units -t service --plain --no-legend --no-page| grep -ve "systemd" -ve "getty" | awk -F'.service' '{print $1}'))
-        echo "Choose one of service"
+        arrservices=($(systemctl list-unit-files --type service --state enabled,disabled --plain --no-legend --no-page | grep -ve "systemd" -ve "getty"  -ve "@" | sed 's/ \{1,\}/,/g' | awk -v g="$Green" -v r="$Red" -v n="$Color_Off" -F'.service' '{if ($2~/enabled,enabled/) {printf "%s%s%s\n", g, $1, n}  else {printf "%s%s%s\n", r, $1, n}}'))
+        #arrservices+=($(systemctl list-unit-files --type service --state disabled --plain --no-legend --no-page | grep -ve "systemd" -ve "getty"  -ve "@"  | awk -v r="$Red" -v n="$Color_Off" -F'.service' '{printf "%s%s%s\n", r, $1$2, n}'))
+        echo -e "Choose one of service ($Green enabled $Color_Off / $Red disabled $Color_Off)"
         PS3="Select number: "
         select yn in "exit" "${arrservices[@]}" 
         do
             if [ "$yn" == "exit" ]
             then break;
             elif [ "$yn" ]
-            then service $yn;
+            then 
+                srv=$(echo $yn | sed -e 's/\x1b\[[0-9;]*m//g')
+                service $srv
             fi
         done
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
