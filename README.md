@@ -8,6 +8,7 @@
 - [Installation Environment for Debian(12)](#installation-environment-for-debian12)
     - [New Menu Items](#new-menu-items)
 - [Environment Settings and Service Management for Debian(12)](#environment-settings-and-service-management-for-debian12)
+- [Debug](#debug)
 
 ## Description
 
@@ -68,6 +69,10 @@ Run
 sudo bash service.sh
 ```
 
+ ## Debug
+
+ If your script needs debugging  - just include `. ./common/debug.sh` under the line `#!/bin/bash`
+
 [up](#webdevenv)
 
 ---
@@ -77,6 +82,7 @@ sudo bash service.sh
 - [Установка окружения для Debian(12)](#установка-окружения-для-debian12)
     - [Новые пункты меню](#установка-окружения-для-debian12)
 - [Настройки окружения и управление сервисами для Debian(12)](#настройки-окружения-и-управление-сервисами-для-debian12)
+- [Отладка](#отладка)
 ## Описание
 
 Примерно раз в год я сталкиваюсь с необходимостью настройки среды для веб-разработки под VDS/VPS или WSL, и каждый раз знания, приобретенные ранее, забываются. В результате, во время последней настройки для WSL, мне захотелось систематизировать процесс и создать набор инструментов. Это привело к созданию данного набора скриптов.
@@ -135,4 +141,9 @@ sudo bash install.sh
 ```bash
 sudo bash service.sh
 ```
+
+ ## Отладка
+
+ Если ваш скрипт нуждается в отладке - просто подключите  `. ./common/debug.sh` под строкой `#!/bin/bash`
+
 [вверх](#webdevenv)

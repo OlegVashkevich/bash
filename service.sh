@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#. ./common/debug.sh
+
 #console colors
 . ./common/colors.sh
 
@@ -143,7 +145,7 @@ do
         done
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "3" ]]; then
-        systemctl list-unit-files --type service  --output=json-pretty --state enabled,disabled | grep -ve "systemd" -ve "getty"  -ve "@" 
+        systemctl list-unit-files --type service --state enabled,disabled | grep -ve "systemd" -ve "getty"  -ve "@" 
         read -p "$(echo -e $Green"Press enter to show menu"$Color_Off)"
     elif [[ "$m" == "4" ]]; then
         #get all services
